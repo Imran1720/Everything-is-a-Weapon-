@@ -1,20 +1,13 @@
 using UnityEngine;
 
-public class BaseballBat : MonoBehaviour
+public class BaseballBat : Weapon
 {
-
-
-    [SerializeField]
-    int power;
-    [SerializeField]
-    int strength;
-    [SerializeField]
-    int weaponWearAmount;
 
     private void Update()
     {
         if (strength <= 0)
         {
+            GetComponentInParent<WeaponHandler>().UnequipWeapon();
             Destroy(gameObject);
         }
     }
@@ -26,7 +19,10 @@ public class BaseballBat : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Enemy enemy = collision.GetComponent<Enemy>();
-        enemy.TakeDamage(power);
-        DecreaseWeaponStrength();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(power);
+            DecreaseWeaponStrength();
+        }
     }
 }

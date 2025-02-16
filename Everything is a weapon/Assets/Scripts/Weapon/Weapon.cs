@@ -7,9 +7,13 @@ public class Weapon : MonoBehaviour
     protected WeaponClassifier weaponClassifier;
 
     [Header("WEAPON DETAILS")]
-    [SerializeField]
-    protected GameObject weaponProjectile;
 
+    [SerializeField]
+    protected int power;
+    [SerializeField]
+    protected int strength;
+    [SerializeField]
+    protected int weaponWearAmount;
 }
 
 

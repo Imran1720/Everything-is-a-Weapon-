@@ -11,6 +11,11 @@ public class WeaponHandler : MonoBehaviour
 
     private Player player;
 
+    private bool canEquipWeapon = false;
+    private bool isWeaponEquiped = false;
+    [SerializeField]
+    private Transform equipPoint;
+
     private void Start()
     {
         trailRenderer.enabled = false;
@@ -19,9 +24,13 @@ public class WeaponHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && isWeaponEquiped)
         {
             RotateWeapon();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            canEquipWeapon = true;
         }
     }
 
@@ -44,5 +53,27 @@ public class WeaponHandler : MonoBehaviour
         {
             trailRenderer.enabled = false;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Can equip weapon");
+        if (collision.GetComponent<Weapon>() != null && canEquipWeapon)
+        {
+            Weapon weapon = collision.GetComponent<Weapon>();
+            canEquipWeapon = false;
+            isWeaponEquiped = true;
+
+            weapon.gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
+            weapon.gameObject.transform.position = equipPoint.position;
+            weapon.gameObject.transform.parent = this.transform;
+
+
+        }
+    }
+
+    public void UnequipWeapon()
+    {
+        isWeaponEquiped = false;
     }
 }
