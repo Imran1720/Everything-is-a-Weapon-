@@ -57,7 +57,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Can equip weapon");
+
         if (collision.GetComponent<Weapon>() != null && canEquipWeapon)
         {
             Weapon weapon = collision.GetComponent<Weapon>();
