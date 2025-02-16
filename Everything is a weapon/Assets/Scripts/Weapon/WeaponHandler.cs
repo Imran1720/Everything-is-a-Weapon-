@@ -2,24 +2,21 @@ using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
 {
-
     [SerializeField]
     private Animator weaponAnimator;
 
     [SerializeField]
     private TrailRenderer trailRenderer;
 
-    private Player player;
 
-    private bool canEquipWeapon = false;
-    private bool isWeaponEquiped = false;
+    public bool isWeaponEquiped = false;
     [SerializeField]
     private Transform equipPoint;
+
 
     private void Start()
     {
         trailRenderer.enabled = false;
-        player = GetComponentInParent<Player>();
     }
 
     private void Update()
@@ -61,6 +58,7 @@ public class WeaponHandler : MonoBehaviour
 
             if (!isWeaponEquiped)
             {
+                weapon.isEquipped = true;
                 weapon.gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
                 weapon.gameObject.transform.position = equipPoint.position;
                 weapon.gameObject.transform.parent = this.transform;

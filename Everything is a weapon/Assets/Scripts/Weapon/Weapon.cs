@@ -16,12 +16,24 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     protected int weaponWearAmount;
 
+    [SerializeField]
+    float duration;
+    float timer;
+    public bool isEquipped;
+
     private void Start()
     {
         UpdateSprite();
+        timer = duration;
     }
     protected void Update()
     {
+
+        timer -= Time.deltaTime;
+        if (timer < 0 && !isEquipped)
+        {
+            Destroy(gameObject);
+        }
         if (strength <= 0)
         {
             GetComponentInParent<WeaponHandler>().UnequipWeapon();

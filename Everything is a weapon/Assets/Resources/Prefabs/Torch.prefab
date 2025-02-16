@@ -94,9 +94,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 1
   weaponSprite: {fileID: -8553596595128423742, guid: 470d9b9776baec9428059ec3439bd4c3, type: 3}
-  power: 5
+  power: 10
   strength: 10
   weaponWearAmount: 2
+  duration: 5
+  isEquipped: 0
 --- !u!1 &6551624066305456889
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,5 +32,9 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         timer = duration;
+        float randomXCordinate = Random.Range(minXRange, maxXRange);
+        float randomYCordinate = Random.Range(minYRange, maxYRange);
+        Vector2 position = new Vector2(randomXCordinate, randomYCordinate);
+        Instantiate(enemy, position, Quaternion.identity);
     }
 }

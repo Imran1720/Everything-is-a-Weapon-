@@ -23,36 +23,27 @@ public class Player : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         MovePlayer(horizontalInput, verticalInput);
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Attack();
-        }
+
         Flip();
     }
 
     private void MovePlayer(float xInput, float yInput)
     {
         Vector2 speed = new Vector2(xInput, yInput).normalized;
-        speed *= speedMultiplier * moveSpeed * Time.deltaTime;
+        speed *= moveSpeed;
         rb.velocity = speed;
     }
 
-    void Attack()
-    {
-        Debug.Log("Attacking Enemy");
 
-    }
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Player took damage!! -" + damage);
         DecreaseHealth(damage);
     }
 
-    void DecreaseHealth(int damage)
+    public void DecreaseHealth(int damage)
     {
         health -= damage;
-        Debug.Log("Player health after damage : " + health + " !!");
     }
 
     void Flip()
@@ -68,5 +59,7 @@ public class Player : MonoBehaviour
         }
         transform.localScale = localscale;
     }
+
+
 
 }

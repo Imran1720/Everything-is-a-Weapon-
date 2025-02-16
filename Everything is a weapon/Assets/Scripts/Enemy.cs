@@ -10,11 +10,11 @@ public class Enemy : MonoBehaviour
 
 
     [SerializeField]
-    private float impact;
-    [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    int attackPower;
 
 
     // Start is called before the first frame update
@@ -62,6 +62,22 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.GetComponent<Player>() != null)
+        {
+            animator.SetTrigger("Explode");
+            collision.GetComponent<Player>().DecreaseHealth(attackPower);
+        }
+    }
+
 }
 
 public enum EnemyType

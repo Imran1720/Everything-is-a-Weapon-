@@ -6,32 +6,25 @@ public class DropHandler : MonoBehaviour
     [SerializeField]
     private GameObject[] dropItems;
 
+    private int dropIndex;
 
 
-    private void Update()
+
+    private void Start()
     {
-        if (Input.GetKeyUp(KeyCode.E))
+        int randomValue = Random.Range(0, 100);
+        if (randomValue < 50)
         {
-            Drop();
+            dropIndex = 0;
+        }
+        else
+        {
+            dropIndex = 1;
         }
     }
-
-    public void Drop()
+    private void OnDestroy()
     {
-        if (CanDropitem())
-        {
-
-        }
+        Instantiate(dropItems[dropIndex], transform.position, Quaternion.identity);
     }
 
-    private bool CanDropitem()
-    {
-
-        float chance = Random.value;
-        if (chance > 0.75f)
-        {
-            return true;
-        }
-        return false;
-    }
 }

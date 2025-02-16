@@ -178,9 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88caa946aea71047959bc3e1ae2cf51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponClassifier:
-    weaponType: 0
-    weaponSprite: {fileID: 0}
-  power: 10
+  weaponType: 0
+  weaponSprite: {fileID: -3721989352038006921, guid: adb7e319a75ef9742ac61d40f28580b4, type: 3}
+  power: 20
   strength: 20
   weaponWearAmount: 5
+  duration: 5
+  isEquipped: 0
