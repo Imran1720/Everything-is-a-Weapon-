@@ -8,8 +8,14 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int health;
 
+
+    [SerializeField]
+    private float impact;
     [SerializeField]
     private float moveSpeed;
+    [SerializeField]
+    private Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +27,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Move();
+        Move();
         // Attack();
     }
 
@@ -35,7 +41,7 @@ public class Enemy : MonoBehaviour
     }
     void Attack()
     {
-        if (Vector2.Distance(target.transform.position, transform.position) <= 1f)
+        if (Vector2.Distance(target.transform.position, transform.position) <= 1.5f)
         {
             Debug.Log("Attacking Player");
         }
@@ -43,14 +49,18 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Enemy took damage!! -" + damage);
+        animator.SetTrigger("Hit");
         DecreaseHealth(damage);
+
     }
 
     void DecreaseHealth(int damage)
     {
         health -= damage;
-        Debug.Log("Enemy health after damage : " + health + " !!");
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
 

@@ -28,10 +28,7 @@ public class WeaponHandler : MonoBehaviour
         {
             RotateWeapon();
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            canEquipWeapon = true;
-        }
+
     }
 
     private void RotateWeapon()
@@ -58,16 +55,18 @@ public class WeaponHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.GetComponent<Weapon>() != null && canEquipWeapon)
+        if (collision.GetComponent<Weapon>() != null)
         {
             Weapon weapon = collision.GetComponent<Weapon>();
-            canEquipWeapon = false;
+
+            if (!isWeaponEquiped)
+            {
+                weapon.gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
+                weapon.gameObject.transform.position = equipPoint.position;
+                weapon.gameObject.transform.parent = this.transform;
+            }
+
             isWeaponEquiped = true;
-
-            weapon.gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
-            weapon.gameObject.transform.position = equipPoint.position;
-            weapon.gameObject.transform.parent = this.transform;
-
 
         }
     }

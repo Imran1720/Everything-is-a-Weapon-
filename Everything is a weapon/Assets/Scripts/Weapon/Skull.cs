@@ -24,6 +24,8 @@ public class Skull : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    bool canThrow = false;
+
 
     private void Start()
     {
@@ -32,7 +34,7 @@ public class Skull : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && canThrow)
         {
             ThrowProjectile();
         }
@@ -52,9 +54,21 @@ public class Skull : MonoBehaviour
         if (collision.GetComponent<Enemy>() != null)
         {
             rb.velocity = Vector2.zero;
+
             circleCollider.radius = increasedAreaOfImpact;
             collision.GetComponent<Enemy>().TakeDamage(damage);
             animator.SetTrigger("Explode");
+        }
+        if (collision.GetComponent<Player>() != null)
+        {
+            canThrow = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Player>() != null)
+        {
+            canThrow = false;
         }
     }
 
